@@ -43,8 +43,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
+        $validations = $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|min:6'
+        ]);
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
@@ -99,9 +103,9 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'token_type' => auth()->user()->name,
-            'token_type' => auth()->user()->id,
-            'token_type' => auth()->user()->emial
+            'name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
+            'email' => auth()->user()->email
         ]);
     }
 }

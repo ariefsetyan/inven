@@ -14,9 +14,11 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
                                                    placeholder="Enter Email Address" v-model="form.email">
+                                            <small class="text-danger" v-if="errors.email">{{errors.email[0]}}</small>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" v-model="form.password">
+                                            <small class="text-danger" v-if="errors.password">{{errors.password[0]}}</small>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -49,19 +51,40 @@
 
 <script>
 export default {
+    created() {
+        console.log(User.loggedIn());
+        if (User.loggedIn()){
+            this.$router.push({name:'home'})
+        }
+    },
     data() {
         return {
             form:{
-                form:null,
+                email:null,
                 password:null
-            }
+            },
+            errors:{}
         }
     },
     methods:{
         login(){
             axios.post('api/auth/login',this.form)
-                .then(res => console.log(res.data))
-                .catch(error => console.log(error.response.data));
+                .then(res => {//console.log(res.data))
+                        User.responseAfterLogin(res)
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Signed in successfully'
+                        })
+                        this.$router.push({name: 'home'})
+                    }
+                )
+                .catch(error =>this.errors = error.response.data.errors)
+            .catch(
+                Toast.fire({
+                    icon: 'warining',
+                    title: 'emial or password invalid'
+                })
+            )
         }
     }
 }
