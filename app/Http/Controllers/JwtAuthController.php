@@ -12,10 +12,11 @@ class JwtAuthController extends Controller
      * Create a new AuthController instance.
      *
      * @return void
+     * $this->middleware('auth:api', ['except' => ['login','signup']]);
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','signup']]);
+        $this->middleware('JWT', ['except' => ['login','signup']]);
     }
 
     public function signup(Request $request){
