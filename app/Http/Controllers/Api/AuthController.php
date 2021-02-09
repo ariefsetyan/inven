@@ -16,22 +16,23 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','signup']]);
+//        $this->middleware('auth:api', ['except' => ['login','signup']]);
+        $this->middleware('JWT', ['except' => ['login','signup']]);
     }
 
     public function signup(Request $request){
 
-        $validateData = $request->validate([
-            'email' => 'required|unique:users|max:255',
+        $validations = $request->validate([
             'name' => 'required',
-            'password' => 'required|min:6|confirmed'
-
+            'email'=>'required|email',
+            'password'=>'required|min:6'
         ]);
 
         $data = array();
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
+
         DB::table('users')->insert($data);
 
         return $this->login($request);
