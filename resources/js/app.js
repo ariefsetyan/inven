@@ -10,6 +10,9 @@ import {routes} from './routes';
 import  User from './Helpers/User';
 window.User = User
 
+import Notification from './Helpers/Notification'
+window.Notification = Notification
+
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
 window.Swal = Swal
