@@ -35,5 +35,8 @@ Route::group([
 
 });
 
+//Route::apiResource('/employee',[\App\Http\Controllers\EmployeeController::class]);
+Route::apiResource('/employee',\App\Http\Controllers\EmployeeController::class);
+
 
 //Route::get('/login', [\App\Http\Controllers\Api\AuthController::class,'login']);
