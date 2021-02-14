@@ -6,6 +6,7 @@ let logout = require('./components/auth/logout.vue').default;
 
 let storeemployee = require('./components/employee/Create.vue').default;
 let tabelemployee = require('./components/employee/Index.vue').default;
+let edit = require('./components/employee/Edit.vue').default;
 export const routes = [
     { path: '/', component: login, name:'/'},
     { path: '/register', component: register,name: 'register' },
@@ -15,5 +16,6 @@ export const routes = [
 
     // Employee Routes
     { path: '/store-employee', component: storeemployee, name:'store-employee' },
-    { path: '/employee', component: tabelemployee, name:'employee' }
+    { path: '/employee', component: tabelemployee, name:'employee' },
+    { path: '/edit-employee', component: edit, name:'edit-employee' }
 ]

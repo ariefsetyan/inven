@@ -37,7 +37,7 @@
                                 <td>{{ employee.sallery }}</td>
                                 <td>{{ employee.joining_date }}</td>
                                 <td>
-<!--                                    <router-link :to="{name: 'edit-employee', params:{id:employee.id}}" class="btn btn-sm btn-primary">Edit</router-link>-->
+                                    <router-link :to="{name: 'edit-employee', params:{id:employee.id}}" class="btn btn-sm btn-primary" >Edit</router-link>
 
                                     <a v-on:click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
                                 </td>
