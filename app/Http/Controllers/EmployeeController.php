@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Image;
 
 class EmployeeController extends Controller
 {
@@ -53,6 +54,7 @@ class EmployeeController extends Controller
             $upload_path = 'backend/employee/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
+//            dd($image_url);
 
             $employee = new Employee;
             $employee->name = $request->name;

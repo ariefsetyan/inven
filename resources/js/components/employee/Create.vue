@@ -28,8 +28,8 @@
                                                     <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </small>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="email" class="form-control" id="exampleInputFirstName" placeholder="Enter Your Email" >
-<!--                                                    <small class="text-danger" v-if="errors.email"> {{ errors.email[0] }} </small>-->
+                                                    <input type="email" class="form-control" id="exampleInputFirstName" placeholder="Enter Your Email" v-model="form.email">
+                                                    <small class="text-danger" v-if="errors.email"> {{ errors.email[0] }} </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,6 +142,7 @@ export default {
             }
         },
         employeeInsert(){
+            console.log(User.loggedIn())
             axios.post('api/employee',this.form)
                 .then(() => {
                     this.$router.push({name: 'employee'})
